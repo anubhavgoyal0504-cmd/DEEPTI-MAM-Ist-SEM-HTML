@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopEase – Product Page</title>
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --text:#1f2937; /* dark gray */
+      --muted:#6b7280; /* slate */
+      --brand:#2563eb; /* blue */
+      --brand-600:#1d4ed8;
+      --accent:#22c55e; /* green */
+      --danger:#ef4444;
+      --border:#e5e7eb;
+      --star:#f59e0b; /* amber */
+    }
+
+    /* Global text + fonts */
+    html,body{
+      height:100%;
+      margin:0; /* remove default margin */
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container{
+      max-width: 1100px; /* width example */
+      margin: 40px auto;  /* center + margin demonstration */
+      padding: 0 16px;    /* page side padding */
+    }
+
+    .breadcrumbs{
+      font-size: 14px; /* text size */
+      color: var(--muted); /* text color */
+      margin-bottom: 16px;
+    }
+    .breadcrumbs a{ color: var(--muted); text-decoration: none; }
+    .breadcrumbs a:hover{ text-decoration: underline; }
+
+    .product{
+      background: var(--card);
+      border: 1px solid var(--border); /* border */
+      border-radius: 16px;             /* rounded border */
+      padding: 24px;                   /* padding */
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 28px;                       /* white space between columns */
+      box-shadow: 0 8px 20px rgba(31,41,55,.06);
+    }
+
+    /* LEFT: Gallery */
+    .gallery{
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .thumbs{
+      display: grid;
+      gap: 12px;
+    }
+    .thumbs img{
+      width: 92px;   /* width & height usage */
+      height: 92px;  
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .hero{
+      width: 100%;
+      height: 480px;          /* fixed height example */
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .hero img{ width:100%; height:100%; object-fit: cover; display:block; }
+
+    /* RIGHT: Details */
+    .title{ font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+    .subtitle{ color: var(--muted); margin: 0 0 12px; }
+
+    .rating{
+      display:flex; align-items:center; gap:8px; margin: 8px 0 16px;
+      color: var(--muted);
+    }
+    .stars{ color: var(--star); font-size: 18px; letter-spacing: 2px; }
+
+    .price-row{ display:flex; align-items:baseline; gap:12px; margin: 8px 0 16px; }
+    .price{ font-size: 28px; font-weight: 700; }
+    .mrp{ color: var(--muted); text-decoration: line-through; }
+    .offer{ color: var(--accent); font-weight:600; }
+
+    .swatch-row, .size-row{
+      margin: 18px 0;
+    }
+    .label{ font-weight:600; font-size:14px; margin-bottom:8px; color:var(--text); }
+
+    .swatches{
+      display:flex; gap:10px; flex-wrap: wrap;
+    }
+    .swatch{
+      width: 28px; height: 28px;           /* width + height */
+      border-radius: 999px;                 /* full round */
+      border: 2px solid var(--border);      /* border */
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.7);
+      cursor: pointer;
+    }
+    .swatch.selected{ outline: 3px solid var(--brand); }
+
+    .sizes{ display:flex; gap:10px; flex-wrap: wrap; }
+    .chip{
+      min-width: 44px; text-align:center; padding: 8px 12px; /* padding */
+      border:1px solid var(--border); border-radius: 10px; cursor: pointer; user-select: none;
+    }
+    .chip:hover{ border-color: var(--brand); }
+    .chip.active{ background: var(--brand); color:#fff; border-color: var(--brand); }
+
+    .cta-row{ display:flex; gap:12px; margin: 22px 0; }
+    .btn{
+      border: 1px solid transparent;
+      padding: 12px 18px;                /* padding */
+      border-radius: 12px; cursor: pointer; font-weight:600;
+    }
+    .btn.primary{ background: var(--brand); color:#fff; }
+    .btn.primary:hover{ background: var(--brand-600);}    
+    .btn.secondary{ background: #fff; border-color: var(--border); }
+    .btn.secondary:hover{ border-color: var(--brand); }
+
+    .points{
+      display:flex; gap:18px; flex-wrap:wrap; color: var(--muted); font-size:14px;
+      margin-bottom: 16px;
+    }
+    .point{ display:flex; align-items:center; gap:8px; }
+
+    .section{ border-top:1px dashed var(--border); padding-top:16px; margin-top:16px; }
+    .desc{ color:var(--muted); line-height:1.7; }
+
+    .specs{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px; }
+    .spec{ padding:10px; border:1px solid var(--border); border-radius:10px; }
+    .spec strong{ display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
+
+    .reviews{ margin-top: 6px; display: grid; gap:12px; }
+    .review{ border:1px solid var(--border); border-radius:12px; padding:12px; }
+    .review .who{ font-weight:600; margin-bottom:6px; }
+    .review .body{ color:var(--muted); line-height:1.6; }
+
+    /* Small footer */
+    footer{ text-align:center; color:var(--muted); font-size:13px; margin:28px 0 10px; }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .product{ grid-template-columns: 1fr; }
+      .hero{ height: 360px; }
+      .container{ margin: 24px auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumbs"> <a href="#">Home</a> / <a href="#">Sneakers</a> / <span>AirFlex Runner</span></nav>
+
+    <section class="product">
+      <!-- GALLERY -->
+      <div class="gallery">
+        <div class="thumbs">
+          <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=400&auto=format&fit=crop" alt="thumb1" onclick="swap('1')"/>
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" alt="thumb2" onclick="swap('2')"/>
+          <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=400&auto=format&fit=crop" alt="thumb3" onclick="swap('3')"/>
+          <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?q=80&w=400&auto=format&fit=crop" alt="thumb4" onclick="swap('4')"/>
+        </div>
+        <div class="hero">
+          <img id="hero" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=1200&auto=format&fit=crop" alt="AirFlex Runner" />
+        </div>
+      </div>
+
+      <!-- DETAILS -->
+      <div class="details">
+        <h1 class="title">AirFlex Runner</h1>
+        <p class="subtitle">Men's Lightweight Training Shoes</p>
+
+        <div class="rating">
+          <div class="stars">★★★★★</div>
+          <div>4.8 (2,341 reviews)</div>
+        </div>
+
+        <div class="price-row">
+          <div class="price">₹3,999</div>
+          <div class="mrp">₹5,999</div>
+          <div class="offer">33% off</div>
+        </div>
+
+        <div class="swatch-row">
+          <div class="label">Color</div>
+          <div class="swatches">
+            <button class="swatch selected" style="background:#111827" aria-label="Black" onclick="selectColor(this)"></button>
+            <button class="swatch" style="background:#2563eb" aria-label="Blue" onclick="selectColor(this)"></button>
+            <button class="swatch" style="background:#dc2626" aria-label="Red" onclick="selectColor(this)"></button>
+            <button class="swatch" style="background:#10b981" aria-label="Green" onclick="selectColor(this)"></button>
+          </div>
+        </div>
+
+        <div class="size-row">
+          <div class="label">Size</div>
+          <div class="sizes">
+            <div class="chip">7</div>
+            <div class="chip active">8</div>
+            <div class="chip">9</div>
+            <div class="chip">10</div>
+            <div class="chip">11</div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn primary">Add to Cart</button>
+          <button class="btn secondary">Buy Now</button>
+        </div>
+
+        <div class="points">
+          <div class="point">🚚 Free delivery</div>
+          <div class="point">↩️ 7‑day return</div>
+          <div class="point">🛡️ 6‑month warranty</div>
+        </div>
+
+        <div class="section">
+          <h3>Description</h3>
+          <p class="desc">Built for all‑day comfort, the AirFlex Runner features breathable mesh, cushioned midsoles, and a grippy outsole. Ideal for daily runs, gym, and casual wear.</p>
+        </div>
+
+        <div class="section">
+          <h3>Specifications</h3>
+          <div class="specs">
+            <div class="spec"><strong>Upper</strong>Engineered mesh</div>
+            <div class="spec"><strong>Midsole</strong>EVA foam</div>
+            <div class="spec"><strong>Outsole</strong>Rubber traction</div>
+            <div class="spec"><strong>Weight</strong>260 g</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Top Reviews</h3>
+          <div class="reviews">
+            <div class="review">
+              <div class="who">Anjali • ★★★★★</div>
+              <div class="body">Very comfy and light. Good for daily walking. Size is true.</div>
+            </div>
+            <div class="review">
+              <div class="who">Rohit • ★★★★☆</div>
+              <div class="body">Grip is nice, cushioning could be a bit softer. Overall value for money.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>© 2025 ShopEase</footer>
+  </div>
+
+  <script>
+    // Minimal interactivity just to preview swapping hero image & selecting color
+    function swap(idx){
+      const urls = {
+        '1':'https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=1200&auto=format&fit=crop',
+        '2':'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',
+        '3':'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1200&auto=format&fit=crop',
+        '4':'https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?q=80&w=1200&auto=format&fit=crop'
+      }
+      document.getElementById('hero').src = urls[idx];
+    }
+
+    function selectColor(btn){
+      document.querySelectorAll('.swatch').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    document.querySelectorAll('.sizes .chip').forEach(chip=>{
+      chip.addEventListener('click',()=>{
+        document.querySelectorAll('.sizes .chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+      })
+    })
+  </script>
+</body>
+</html>
