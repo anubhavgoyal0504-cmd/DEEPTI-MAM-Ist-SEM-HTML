@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>uses of div createa table</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .main{
+            background-color: green;
+            width: 1000px;
+            margin: 20px auto;
+            color: red;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: visible;
+        }
+
+        .row1{
+            background-color: blue;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px 0;
+            color: white;
+            font-size: 26px;
+        }
+
+        
+        .row2{
+            height: 40px;
+            background-color: yellow;
+            overflow: hidden; /* contain floats */
+        }
+        .row2-col1,
+        .row2-col2,
+        .row2-col3,
+        .row2-col4,
+        .row2-col5{
+            float: left;
+            width: 200px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px; /* center vertically */
+        }
+        .row2-col1{ background: transparent; } /* keep default */
+        .row2-col2{ background: pink; }
+        .row2-col3{ background: red; color: #fff; }
+        .row2-col4{ background: blue; color: #fff; }
+        .row2-col5{ background: white; color: #000; }
+
+        
+        .row3{
+            height: 200px;
+            overflow: hidden; /* contain floats */
+        }
+
+        .row3-col1{
+            float: left;
+            width: 250px;
+        }
+        .row3-col1-row1,
+        .row3-col1-row2,
+        .row3-col1-row3,
+        .row3-col1-row4,
+        .row3-col1-row5{
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .row3-col1-row1{ background-color: aqua; }
+        .row3-col1-row2{ background-color: rgb(183,253,20); }
+        .row3-col1-row3{ background-color: aqua; }
+        .row3-col1-row4{ background-color: rgb(197,246,2); }
+        .row3-col1-row5{ background-color: rgb(228,29,235); color: #fff; }
+
+        .row3-col2{
+            float: left;
+            width: 750px;
+            text-align: center;
+            padding: 15px;
+            font-size: 90px;
+            background-color: brown;
+            height: 170px; /* match original intention */
+            color: white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        /* clients title */
+        .row4{
+            height: 150px;
+            font-size: 40px;
+            background-color: coral;
+            text-align: center;
+            line-height: 150px;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* clients / images row */
+        .row5{
+            height: 100px;
+            background-color: rgb(0,225,255);
+            overflow: hidden; /* contain floats */
+            padding: 10px 0;
+        }
+
+        .row5-col1,
+        .row5-col2,
+        .row5-col3{
+            float: left;
+            width: 330px;
+            height: 100px;
+            font-size: 40px;
+            margin-right: 10px; /* small gap like original */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .row5-col1{ background-color: brown; color: white; }
+        .row5-col2{ background-color: beige; color: #111; }
+        .row5-col3{ background-color: rgb(9,236,221); color: #111; }
+
+        /* ensure images fit inside their boxes */
+        .row5-col1 img,
+        .row5-col2 img,
+        .row5-col3 img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* footer / bottom row */
+        .row6{
+            text-align: center;
+            font-size: 20px;
+            padding: 10px 0 20px 0;
+        }
+
+        /* small responsive tweak so it doesn't overflow on narrow screens */
+        @media (max-width: 1024px){
+            .main { width: 95%; }
+            .row2-col1, .row2-col2, .row2-col3, .row2-col4, .row2-col5 { width: 20%; }
+            .row3-col1{ width: 30%; }
+            .row3-col2{ width: 70%; font-size: 56px; height: 140px; }
+            .row5-col1, .row5-col2, .row5-col3 { width: 32%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="row1">Anubhav Goyal</div>
+
+        <div class="row2">
+            <div class="row2-col1">Home</div>
+            <div class="row2-col2">About</div>
+            <div class="row2-col3">Courses</div>
+            <div class="row2-col4">Gallery</div>
+            <div class="row2-col5">Contact us</div>
+        </div>
+
+        <div class="row3">
+            <div class="row3-col1">
+                <div class="row3-col1-row1">Home</div>
+                <div class="row3-col1-row2">About</div>
+                <div class="row3-col1-row3">course</div>
+                <div class="row3-col1-row4">Gallery</div>
+                <div class="row3-col1-row5">Contact us</div>
+            </div>
+
+            <div class="row3-col2">Image Here</div>
+        </div>
+
+        <div class="row4"> Our Clients</div>
+
+        <div class="row5">
+            <div class="row5-col1">
+                <img src="https://imgs.search.brave.com/BQvSEyuCNYvHDDtiYIdvE0Y0ifzaQo4bQPue-yh46Mk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9m/dW5ueS1tb25rZXkt/d2l0aC1zdW5nbGFz/c2VzLXN0dWRpb18y/My0yMTUwODQ0MTQ5/LmpwZz9zZW10PWFp/c19oeWJyaWQmdz03/NDAmcT04MA" alt="Funny monkey with sunglasses" />
+            </div>
+
+            <div class="row5-col2">
+                <img src="https://imgs.search.brave.com/BQvSEyuCNYvHDDtiYIdvE0Y0ifzaQo4bQPue-yh46Mk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9m/dW5ueS1tb25rZXkt/d2l0aC1zdW5nbGFz/c2VzLXN0dWRpb18y/My0yMTUwODQ0MTQ5/LmpwZz9zZW10PWFp/c19oeWJyaWQmdz03/NDAmcT04MA" alt="Funny monkey with sunglasses" />
+            </div>
+
+            <div class="row5-col3">
+                <img src="https://imgs.search.brave.com/BQvSEyuCNYvHDDtiYIdvE0Y0ifzaQo4bQPue-yh46Mk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9m/dW5ueS1tb25rZXkt/d2l0aC1zdW5nbGFz/c2VzLXN0dWRpb18y/My0yMTUwODQ0MTQ5/LmpwZz9zZW10PWFp/c19oeWJyaWQmdz03/NDAmcT04MA" alt="Funny monkey with sunglasses" />
+            </div>
+        </div>
+
+        <div class="row6">Home|About|Course|Gallery|Contact Us</div>
+    </div>
+</body>
+</html>
